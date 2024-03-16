@@ -4,47 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>roulette</title>
+    <style>
+        .poin{position: absolute;top: calc(50% - 35px);left: calc(50% - 35px);z-index: 333;font-size: 50px;width: 70px;height: 70px;}
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
-    <canvas width="202" height="202"></canvas>
+    <canvas width="202" height="202" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);"></canvas>
+    <div class="poin">🔪</div>
     <script>
         let rl=document.querySelector('canvas').getContext('2d')
-        rl.beginPath()
-        rl.moveTo(101,101)
-        rl.arc(101,101,100,0,Math.PI/2)
-        rl.closePath()
-        rl.font='30px serif'
-        rl.textAlign='center'
+        for (let i = 0; i < 4; i++) {
+            rl.beginPath()
+            rl.moveTo(101,101)
+            rl.arc(101,101,100,Math.PI/2*i,Math.PI/2*(i+1))
+            rl.closePath()
+            rl.font='30px serif'
+            rl.textAlign='center'
+            // rl.fillText('1',150,150)
+            rl.stroke()
+        }
         rl.fillText('1',150,150)
-        rl.stroke()
-
-        rl.beginPath()
-        rl.moveTo(101,101)
-        rl.arc(101,101,100,Math.PI/2,Math.PI)
-        rl.closePath()
-        rl.font='30px serif'
-        rl.textAlign='center'
         rl.fillText('2',50,150)
-        rl.stroke()
-
-        rl.beginPath()
-        rl.moveTo(101,101)
-        rl.arc(101,101,100,Math.PI,Math.PI*3/2)
-        rl.closePath()
-        rl.font='30px serif'
-        rl.textAlign='center'
         rl.fillText('3',50,70)
-        rl.stroke()
-        
-        rl.beginPath()
-        rl.moveTo(101,101)
-        rl.arc(101,101,100,Math.PI*3/2,Math.PI*2)
-        rl.closePath()
-        rl.font='30px serif'
-        rl.textAlign='center'
         rl.fillText('4',150,70)
-        rl.stroke()
+        $('canvas').click(function () {
+            let rota=(90*Math.ceil(Math.random()*4))+3600
+            $('.poin').css({transform:`rotate(${rota}deg)`,transformOrigin:'center center',transition:'2s'})
+        })
     </script>
 </body>
 </html>
