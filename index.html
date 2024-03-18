@@ -28,9 +28,28 @@
         rl.fillText('2',50,150)
         rl.fillText('3',50,70)
         rl.fillText('4',150,70)
-        $('canvas').click(function () {
-            let rota=(90*Math.ceil(Math.random()*4))+3600
-            $('.poin').css({transform:`rotate(${rota}deg)`,transformOrigin:'center center',transition:'2s'})
+        let currentRotation
+        $('canvas').click(function (event) {
+            // 랜덤한 회전 각도 생성
+    let rdom = Math.ceil(Math.random() * 4);
+    let rota = (90 * rdom) + 3600;
+
+    // 현재 위치에서 회전하는 애니메이션 설정
+    $('.poin').css({
+        transform: `rotate(${currentRotation}deg)`, // 현재 위치로 설정
+        transition: 'none' // 애니메이션 없음
+    });
+
+    // 회전 애니메이션 적용
+    setTimeout(() => {
+        $('.poin').css({
+            transform: `rotate(${rota}deg)`, // 새로운 회전 각도로 설정
+            transition: '2s' // 2초 동안 애니메이션 적용
+        });
+    }, 10);
+
+    // 다음 클릭을 위해 현재 회전 각도 업데이트
+    currentRotation += rota;
         })
     </script>
 </body>
